@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from "../src/components/home/Home"
-import User from "../src/components/user/User"
-
+import Dser from "../src/components/dser/Dser"
+import Signup from "../src/components/user/Signup"
+import Login from "../src/components/user/Login"
+import Edit from "../src/components/user/Edit"
+import Account from "../src/components/user/Account"
 
 
 Vue.use(VueRouter);
@@ -13,11 +16,23 @@ export default new VueRouter({
         path: '/',
         component: Home
     }, {
-        path: '/user',
-        component: User
+        path: '/dser',
+        component: Dser
     },
+// {
+//     path: '/user',
+//     component: Login
+// },
+// {
+//     path: '/user',
+//     component: Signup
+// },
+// {
+//     path: '/user',
+//     component: Edit
+// },
 {
-    path: '/login',
-    component: Login
+    path: '/user',
+    component: Account
 }]
 });
