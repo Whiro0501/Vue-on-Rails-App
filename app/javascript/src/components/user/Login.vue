@@ -57,7 +57,7 @@ export default {
                         "access-token",
                         response.headers["access-token"]
                     );
-                    localStorage.setItem("expiry", response.headers.expiry);
+                    // localStorage.setItem("expiry", response.headers.expiry);
                     localStorage.setItem("client", response.headers.client);
                     localStorage.setItem("uid", response.headers.uid);
                     localStorage.setItem(
