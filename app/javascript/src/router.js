@@ -25,6 +25,7 @@ export default new VueRouter({
     },
     {
         path: '/sale',
+        name: "Sale",
         component: Sale
     },
     {
@@ -48,4 +49,7 @@ export default new VueRouter({
     path: '/user',
     component: Account
 }]
+
 });
+
+
