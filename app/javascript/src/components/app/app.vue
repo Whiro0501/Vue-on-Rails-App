@@ -18,10 +18,6 @@
 import LayoutHeader from "../layout/LayoutHeader";
 export default {
     components: { LayoutHeader },
-    data() {
-        return {
-            drawer: null,
-        };
-    },
+
 };
 </script>

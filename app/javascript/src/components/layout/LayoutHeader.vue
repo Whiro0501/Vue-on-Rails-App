@@ -1,6 +1,6 @@
 <template>
-<header>
-        <v-navigation-drawer app v-model="drawer" clipped>
+    <header>
+        <v-navigation-drawer app v-model="drawer"  temporary buttom>
             <v-container>
                 <v-list-item>
                     <v-list-item-content>
@@ -19,7 +19,7 @@
                         :prepend-icon="nav_list.icon"
                         no-action
                         :append-icon="nav_list.lists ? undefined : ''"
-                    >
+                    active-class="deep-purple--text text--accent-4">
                         <template v-slot:activator>
                             <v-list-item-content>
                                 <v-list-item-title>
@@ -40,15 +40,9 @@
                         </v-list-item>
                     </v-list-group>
                 </v-list>
-                <v-list-item link @click="postsNew">
-          <v-list-item-action>
-            <v-icon>mdi-folder-edit</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>レシピを書く</v-list-item-title>
-        </v-list-item>
             </v-container>
         </v-navigation-drawer>
-        <v-app-bar color="primary" dark app clipped-left>
+        <v-app-bar color="primary" dark app >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Vuetify</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -86,18 +80,9 @@
 
 <script>
 export default {
-    methods: {
-        postsNew() {
-      if (this.$route.name !== "Sale") {
-        this.$router.push({ path: "/sale" });
-      } else {
-        this.drawer = false;
-      }
-    },
-    },
     data() {
         return {
-            drawer: null,
+            drawer: false,
             supports: [
                 {
                     name: "Consulting and suppourt",
