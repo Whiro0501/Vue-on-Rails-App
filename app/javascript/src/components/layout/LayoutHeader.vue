@@ -1,6 +1,6 @@
 <template>
     <header>
-        <v-navigation-drawer app v-model="drawer"  temporary buttom>
+        <v-navigation-drawer app v-model="drawer" temporary buttom>
             <v-container>
                 <v-list-item>
                     <v-list-item-content>
@@ -19,7 +19,8 @@
                         :prepend-icon="nav_list.icon"
                         no-action
                         :append-icon="nav_list.lists ? undefined : ''"
-                    active-class="deep-purple--text text--accent-4">
+                        active-class="deep-purple--text text--accent-4"
+                    >
                         <template v-slot:activator>
                             <v-list-item-content>
                                 <v-list-item-title>
@@ -42,12 +43,15 @@
                 </v-list>
             </v-container>
         </v-navigation-drawer>
-        <v-app-bar color="primary" dark app >
+        <v-app-bar color="primary" dark app>
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Vuetify</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-                <v-btn text to="/sale">Sale Enterprise</v-btn>
+                <v-btn icon>
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+                <v-btn text to="/sale" >Sale Enterprise</v-btn>
                 <v-btn text to="/about">For Enterprise</v-btn>
                 <v-menu offset-y>
                     <template v-slot:activator="{ on }">
