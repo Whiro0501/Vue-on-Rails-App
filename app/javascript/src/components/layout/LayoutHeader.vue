@@ -12,6 +12,12 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider></v-divider>
+                <v-list-item v-if="currentUser.id > 0">
+                    <v-list-item-action>
+                        <v-icon>mdi-egg-easter</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-title>最近のレシピ</v-list-item-title>
+                </v-list-item>
                 <v-list nav dense>
                     <v-list-group
                         v-for="nav_list in nav_list"
@@ -51,7 +57,7 @@
                 <v-btn icon>
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
-                <v-btn text to="/sale" >Sale Enterprise</v-btn>
+                <v-btn text to="/sale">Sale Enterprise</v-btn>
                 <v-btn text to="/about">For Enterprise</v-btn>
                 <v-menu offset-y>
                     <template v-slot:activator="{ on }">
@@ -83,10 +89,38 @@
 </template>
 
 <script>
+import { currentUser } from "../../../packs/mixins/currentUser";
 export default {
+    mixins: [currentUser],
     data() {
         return {
             drawer: false,
+            watch: { currentUser: "setListFolders" },
+            methods: {
+                setListFolders() {
+                    if (this.currentUser.id > 0) {
+                        axios
+                            .get(
+                                `/api/v1/users/${this.currentUser.id}/list_folders`
+                            )
+                            .then(({ data }) => {
+                                this.list_folders = data;
+                            });
+                    }
+                },
+                listsIndexPage() {
+                    if (
+                        this.$route.path !==
+                        `/users/${this.currentUser.id}/list_folders`
+                    ) {
+                        this.$router.push(
+                            `/users/${this.currentUser.id}/list_folders`
+                        );
+                    } else {
+                        this.drawer = false;
+                    }
+                },
+            },
             supports: [
                 {
                     name: "Consulting and suppourt",

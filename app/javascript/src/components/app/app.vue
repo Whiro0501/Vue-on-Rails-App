@@ -17,14 +17,13 @@
 <script>
 import LayoutHeader from "../layout/LayoutHeader";
 export default {
-    data(){
-        return{
-    styleObject: {
-        padding: '64px 0px 0px'
-    },
+    data() {
+        return {
+            styleObject: {
+                padding: "64px 0px 0px",
+            },
         };
     },
     components: { LayoutHeader },
-
 };
 </script>
