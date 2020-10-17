@@ -7,7 +7,7 @@
 
 import Vue from 'vue';
 // import App from '../src/components/app/app';
-import App from '../src/components/dser/Dser';
+import App from '../src/components/app/App';
 import Vuetify from 'vuetify';
 import router from '../src/router';
 import store from "../src/vuex/index";

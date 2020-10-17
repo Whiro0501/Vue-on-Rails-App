@@ -1,6 +1,6 @@
 <template>
-    <v-app>
-        <v-navigation-drawer app v-model="drawer" clipped>
+    <header>
+        <v-navigation-drawer app v-model="drawer" temporary buttom>
             <v-container>
                 <v-list-item>
                     <v-list-item-content>
@@ -12,6 +12,12 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider></v-divider>
+                <v-list-item v-if="currentUser.id > 0">
+                    <v-list-item-action>
+                        <v-icon>mdi-egg-easter</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-title>最近のレシピ</v-list-item-title>
+                </v-list-item>
                 <v-list nav dense>
                     <v-list-group
                         v-for="nav_list in nav_list"
@@ -19,6 +25,7 @@
                         :prepend-icon="nav_list.icon"
                         no-action
                         :append-icon="nav_list.lists ? undefined : ''"
+                        active-class="deep-purple--text text--accent-4"
                     >
                         <template v-slot:activator>
                             <v-list-item-content>
@@ -27,7 +34,11 @@
                                 </v-list-item-title>
                             </v-list-item-content>
                         </template>
-                        <v-list-item v-for="list in nav_list.lists" :key="list.name" :to="list.link">
+                        <v-list-item
+                            v-for="list in nav_list.lists"
+                            :key="list.name"
+                            :to="list.link"
+                        >
                             <v-list-item-content>
                                 <v-list-item-title>{{
                                     list
@@ -38,11 +49,14 @@
                 </v-list>
             </v-container>
         </v-navigation-drawer>
-        <v-app-bar color="primary" dark app clipped-left>
+        <v-app-bar color="primary" dark app>
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Vuetify</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
+                <v-btn icon>
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn>
                 <v-btn text to="/sale">Sale Enterprise</v-btn>
                 <v-btn text to="/about">For Enterprise</v-btn>
                 <v-menu offset-y>
@@ -53,7 +67,11 @@
                     </template>
                     <v-list>
                         　<v-subheader>Get help</v-subheader>
-<v-list-item v-for="support in supports" :key="support.name" :to="support.link">
+                        <v-list-item
+                            v-for="support in supports"
+                            :key="support.name"
+                            :to="support.link"
+                        >
                             <v-list-item-icon>
                                 <v-icon>{{ support.icon }}</v-icon>
                             </v-list-item-icon>
@@ -67,24 +85,42 @@
                 </v-menu>
             </v-toolbar-items>
         </v-app-bar>
-        <v-main>
-<v-container>
-  <v-row>
-    <v-col>
-<router-view></router-view>
-    </v-col>
-  </v-row>
-</v-container>
-        </v-main>
-        <v-footer color="primary" dark app clipped-left> Vuetify </v-footer>
-    </v-app>
+    </header>
 </template>
 
 <script>
+import { currentUser } from "../../../packs/mixins/currentUser";
 export default {
+    mixins: [currentUser],
     data() {
         return {
-            drawer: null,
+            drawer: false,
+            watch: { currentUser: "setListFolders" },
+            methods: {
+                setListFolders() {
+                    if (this.currentUser.id > 0) {
+                        axios
+                            .get(
+                                `/api/v1/users/${this.currentUser.id}/list_folders`
+                            )
+                            .then(({ data }) => {
+                                this.list_folders = data;
+                            });
+                    }
+                },
+                listsIndexPage() {
+                    if (
+                        this.$route.path !==
+                        `/users/${this.currentUser.id}/list_folders`
+                    ) {
+                        this.$router.push(
+                            `/users/${this.currentUser.id}/list_folders`
+                        );
+                    } else {
+                        this.drawer = false;
+                    }
+                },
+            },
             supports: [
                 {
                     name: "Consulting and suppourt",
