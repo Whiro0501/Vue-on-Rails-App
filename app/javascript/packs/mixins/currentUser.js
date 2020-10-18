@@ -19,11 +19,11 @@ export const currentUser = {
     methods: {
         setCurrentUser() {
             axios
-                .get(`/api/v1/users/current`, {
+                .get(`/api/v1/users/index`, {
                     headers: {
                         'access-token': localStorage.getItem('access-token'),
-                        uid: localStorage.getItem('uid'),
-                        client: localStorage.getItem('client'),
+                        'uid': localStorage.getItem('uid'),
+                        'client': localStorage.getItem('client'),
                     },
                 })
                 .then((response) => {
