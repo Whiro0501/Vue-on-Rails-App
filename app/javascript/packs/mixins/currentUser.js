@@ -28,7 +28,7 @@ export const currentUser = {
                 })
                 .then((response) => {
                     if (response.data !== null) {
-                        this.currentUser = response.data
+                        this.currentUser = response.data;
                     } else {
                         this.currentUser.id = -1
                     }

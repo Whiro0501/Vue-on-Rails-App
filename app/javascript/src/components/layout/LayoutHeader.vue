@@ -18,6 +18,9 @@
                     </v-list-item-action>
                     <v-list-item-title>最近のレシピ</v-list-item-title>
                 </v-list-item>
+                <v-list-item>
+                    <v-list-item-title>{{ currentUser.id}}</v-list-item-title>
+                </v-list-item>
                 <v-list nav dense>
                     <v-list-group
                         v-for="nav_list in nav_list"
