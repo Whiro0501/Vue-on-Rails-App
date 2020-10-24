@@ -19,7 +19,7 @@
                     <v-list-item-title>最近のレシピ</v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                    <v-list-item-title>{{ currentUser.id}}</v-list-item-title>
+                    <v-list-item-title>{{ currentUser.id }}</v-list-item-title>
                 </v-list-item>
                 <v-list nav dense>
                     <v-list-group
@@ -56,10 +56,17 @@
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Vuetify</v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-text-field
+                v-model="text1"
+                label="Search"
+                hide-details
+                style="max-width: 165px"
+            >
+                <template v-slot:append>
+                    <v-btn icon> <v-icon>mdi-magnify</v-icon></v-btn>
+                </template>
+            </v-text-field>
             <v-toolbar-items>
-                <v-btn icon>
-                    <v-icon>mdi-magnify</v-icon>
-                </v-btn>
                 <v-btn text to="/sale">Sale Enterprise</v-btn>
                 <v-btn text to="/about">For Enterprise</v-btn>
                 <v-menu offset-y>
@@ -193,3 +200,8 @@ export default {
     },
 };
 </script>
+
+<style  scoped>
+.v-text-field input {
+}
+</style>
